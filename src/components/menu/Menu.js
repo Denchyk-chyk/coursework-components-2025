@@ -21,7 +21,7 @@ function Menu() {
                         <GenreDropdown/>   
                         {user && user.role === 'admin' && <Nav.Link as={NavLink} to='/book-editor/-1'>Додати</Nav.Link>}
                         <Nav.Link as={NavLink} to='/t'>Про нас</Nav.Link>
-                        <Nav.Link as={NavLink} to='/'>Контакти</Nav.Link>
+                        <Nav.Link as={NavLink} to='/t'>Контакти</Nav.Link>
                     </Nav>
                     <Nav className='d-flex align-items-center'>
                         <CartIcon />

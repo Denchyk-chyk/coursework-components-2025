@@ -9,11 +9,12 @@ import ToggleList from './ToggleList';
 import GenresList from './GenresList';
 import PriceRange from './PriceRange';
 import FilterSection from './FilterSection';
+import { applyFilters } from '../../logic/filtration/applyFilters';
 
 // Бічна панель фільтрів для книги
 // Підтримується фільтрація за жанрами, авторами, видавництвами, обкладинками, ціною
 
-const FilterBar = ({ setFitered }) => {
+const FilterBar = ({ setFitered, initialSelectedGenres = [] }) => {
     const { books } = useContext(BooksContext);
     const { authors } = useContext(AuthorsContext);
     const { publishers } = useContext(PublishersContext);
@@ -23,7 +24,7 @@ const FilterBar = ({ setFitered }) => {
     const toggleSidebar = () => setShow(!show); // Перемикання видимості
 
     // Вибрані значення фільтрів
-    const [selectedGenres, setSelectedGenres] = useState([]);
+    const [selectedGenres, setSelectedGenres] = useState(initialSelectedGenres);
     const [selectedAuthors, setSelectedAuthors] = useState([]);
     const [selectedCovers, setSelectedCovers] = useState([]);
     const [selectedPublishers, setSelectedPublishers] = useState([]);
@@ -46,43 +47,15 @@ const FilterBar = ({ setFitered }) => {
         price: true
     });
 
+    // Застосувати фільтри при зміні selectedGenres або інших фільтрів
+    useEffect(() => {
+        const filtered = applyFilters(books, selectedAuthors, selectedPublishers, selectedCovers, priceRange, selectedGenres);
+        setFitered(filtered);
+    }, [selectedGenres, selectedAuthors, selectedPublishers, selectedCovers, priceRange, books]);
+
     // Застосування фільтрів до списку книг
-    const applyFilters = () => {
-        const filtered = books.filter(book => {
-            // Автори
-            if (selectedAuthors.length > 0 && !selectedAuthors.includes(book.author)) {
-                return false;
-            }
-
-            // Видавництва
-            if (selectedPublishers.length > 0 && !selectedPublishers.includes(book.publisher)) {
-                return false;
-            }
-
-            // Обкладинки
-            if (selectedCovers.length > 0 && !selectedCovers.includes(book.cover)) {
-                return false;
-            }
-
-            // Ціна
-            if (priceRange) {
-                if (book.price < priceRange.from || book.price > priceRange.to) {
-                    return false;
-                }
-            }
-
-            // Жанри
-            if (selectedGenres.length > 0) {
-                const genresInBook = [book.genre, book.subgenre1, book.subgenre2];
-                const matches = genresInBook.some(g => selectedGenres.includes(g));
-                if (!matches) {
-                    return false;
-                }
-            }
-
-            return true;
-        });
-
+    const handleApplyFilters = () => {
+        const filtered = applyFilters(books, selectedAuthors, selectedPublishers, selectedCovers, priceRange, selectedGenres);
         setFitered(filtered);
     };
 
@@ -132,7 +105,7 @@ const FilterBar = ({ setFitered }) => {
                             <PriceRange values={priceRange} setValues={setPriceRange} />
                         </FilterSection>
 
-                        <Button variant='light' onClick={applyFilters}>
+                        <Button variant='light' onClick={handleApplyFilters}>
                             Застосувати
                         </Button>
                     </Form>

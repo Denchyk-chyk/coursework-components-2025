@@ -6,20 +6,27 @@ import Menu from "../../components/menu/Menu";
 import Footer from "../../components/footer/Footer";
 import Search from "../../components/filters/Search";
 import "./Styles.css";
+import { useParams } from "react-router-dom";
 
 const Catalog = () => {
     const { books } = useContext(BooksContext);
     const [filtered, setFiltered] = useState(books);
     const [found, setFound] = useState(books);
+    const { genre } = useParams();
 
-    useEffect(() => { setFiltered(books); }, [books]);
+    useEffect(() => {
+        setFiltered(books);
+    }, [books]);
 
     return (
         <div id='catalog' className='d-flex flex-column min-vh-100'>
             <Menu />
 
             <div id='filters'>
-                <FilterBar setFitered={setFiltered} />
+                <FilterBar 
+                    setFitered={setFiltered} 
+                    initialSelectedGenres={genre ? [genre] : []} 
+                />
                 <Search books={filtered} setFound={setFound}/>
             </div>
 

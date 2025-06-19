@@ -26,6 +26,7 @@ const router = createBrowserRouter([
   { path: '/book/:id', element: <BookData/> },
   { path: '/book-editor/:id', element: <BookEditor/> },
   { path: '/catalog', element: <Catalog/> },
+  { path: '/catalog/:genre', element: <Catalog/> },
 ]);
 
 function Root() {
