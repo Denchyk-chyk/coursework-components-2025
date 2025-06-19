@@ -1,0 +1,71 @@
+/* === Картка книги === */
+
+.book-card {
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.book-card img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.book-card .card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.book-card .card-text {
+    margin: -5px 0 10px 0;
+}
+
+.book-card .form-control {
+    width: 100%;
+}
+
+.book-card #minus {
+    margin-top: -12px;
+    height: 36px;
+}
+
+/* === Внутрішнє компонування кнопок/полів === */
+
+.half-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.half {
+    flex: 1;
+    margin-right: 0.75rem;
+}
+
+/* === Заголовок галереї (для вузької прокрутки) === */
+
+.gallery-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    z-index: 10;
+}
+
+.gallery-title {
+    flex: 1;
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+}

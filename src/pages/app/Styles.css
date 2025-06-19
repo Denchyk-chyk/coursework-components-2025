@@ -1,0 +1,15 @@
+body {
+  background-color: #f7f8f9;
+}
+
+section {
+  padding: 50px 0px;
+}
+
+.alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}

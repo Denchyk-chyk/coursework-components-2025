@@ -1,0 +1,22 @@
+#catalog #bar-btn {
+    position: relative;
+    top: 30px;
+    margin: 1.5rem;
+}
+
+#catalog #filters {
+    margin-top: -25px;
+}
+
+@media (max-width: 769px) {
+    #catalog #bar-btn {
+        top: 0;
+        margin: 0.75rem;
+        margin-left: 5%;
+    }
+
+    #catalog #filters {
+        margin-top: 0;
+        margin-bottom: calc(-30px - 0.5rem);
+    }
+}

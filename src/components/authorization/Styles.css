@@ -1,0 +1,18 @@
+.authorization-form {
+    width: 90%;
+    max-width: 800px;
+}
+
+.authorization-form label {
+    display: block;
+}
+
+.authorization-form p:hover{
+    text-decoration: underline;
+    filter: brightness(70%);
+    cursor: pointer;
+}
+
+.authorization-form p:active{
+    filter: brightness(20%);
+}

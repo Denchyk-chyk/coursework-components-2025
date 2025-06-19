@@ -1,0 +1,58 @@
+/* === Основний контейнер бічної панелі === */
+
+.offcanvas {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: visible !important;
+}
+
+/* === Тіло бічної панелі === */
+
+.offcanvas-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: visible;
+}
+
+/* === Випадаюче меню в жанровому випадаючому списку === */
+
+.offcanvas #genre-dropdown {
+    font-size: 20px;
+    color: black;
+    padding-left: 0;
+}
+
+/* === Жанровий аккордеон === */
+
+.genre-accordion {
+    margin-left: -0.5rem;
+}
+
+/* === Мінус у фільтрі (згортання секцій) === */
+
+.filter-section .minus {
+    margin-right: 0.13rem;
+}
+
+/* === Адаптація для мобільних пристроїв === */
+
+@media (max-width: 768px) {
+    .offcanvas .dropdown,
+    .offcanvas .dropdown-submenu {
+        position: relative !important;
+    }
+
+    .offcanvas .dropdown-menu .dropdown-menu {
+        position: absolute !important;
+        left: 0 !important;
+        top: 100% !important;
+        margin-top: 0 !important;
+        transform: none !important;
+        z-index: 1051;
+    }
+
+    .offcanvas .dropdown-menu > .dropdown-submenu {
+        position: relative;
+    }
+}
