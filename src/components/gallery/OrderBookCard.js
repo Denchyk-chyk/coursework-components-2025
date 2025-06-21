@@ -4,7 +4,7 @@ import BookCard from './BookCard';
 // Компонент замовлення книги у вигляді картки
 // Використовується компонент BookCard з кастомною кнопкою у вигляді блоку введення кількості та кнопки зменшення
 
-function OrderBookCard({ book }) {
+function OrderBookCard({ book, count }) {
     return (
         <BookCard
             book={book}
@@ -12,7 +12,7 @@ function OrderBookCard({ book }) {
             button={
                 <div className='half-wrapper'>
                     <div className='half'>
-                        <Form.Control type='number' defaultValue={1} />
+                        <Form.Control type='number' defaultValue={count} />
                     </div>
                     <div className='half'>
                         <Button variant='secondary'>

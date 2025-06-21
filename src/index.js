@@ -19,6 +19,8 @@ import Catalog from './pages/catalog/Catalog';
 import { loadLines } from './logic/loading/loadLines';
 import { loadBooks } from './logic/loading/loadBooks';
 import { loadJson } from './logic/loading/loadJson';
+import UserCart from './pages/cart/UserCart';
+import Authorization from './pages/authorization/Authorization';
 
 const router = createBrowserRouter([
   { path: '/', element: <App/> },
@@ -27,6 +29,8 @@ const router = createBrowserRouter([
   { path: '/book-editor/:id', element: <BookEditor/> },
   { path: '/catalog', element: <Catalog/> },
   { path: '/catalog/:genre', element: <Catalog/> },
+  { path: '/authorization/:type/:nextPage?', element: <Authorization/> },
+  { path: '/cart', element: <UserCart/> },
 ]);
 
 function Root() {

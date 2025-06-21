@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import "./Styles.css";
 import FormField from "./FormField";
 
-const AuthorizationForm = ({ header, alternative, items, onSubmit, validate, onChange, outerValues }) => {
+const AuthorizationForm = ({ header, alternative, alternativeAction, items, onSubmit, validate, onChange, outerValues }) => {
     const isControlled = outerValues !== undefined;
 
     const [innerValues, setInnerValues] = useState(() =>
@@ -65,7 +65,9 @@ const AuthorizationForm = ({ header, alternative, items, onSubmit, validate, onC
                             errorText={errors[item.name]}
                         />
                     ))}
-                    {alternative && <p className="text-center text-muted">{alternative}</p>}
+                    {alternative && <Button id='alternative-btn' variant="link"  className='text-muted w-100 p-0 mb-1' onClick={alternativeAction}>
+                        {alternative}
+                    </Button>}
                     <Button variant="light" type="submit">Підтвердити</Button>
                 </div>
             </Form>

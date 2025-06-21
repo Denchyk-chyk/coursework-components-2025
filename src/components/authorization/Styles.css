@@ -7,12 +7,16 @@
     display: block;
 }
 
-.authorization-form p:hover{
-    text-decoration: underline;
-    filter: brightness(70%);
-    cursor: pointer;
+.authorization-form #alternative-btn {
+    pointer-events: auto !important;
 }
 
-.authorization-form p:active{
-    filter: brightness(20%);
+.authorization-form #alternative-btn:hover{
+    text-decoration: underline !important;
+    filter: brightness(70%) !important;
+    cursor: pointer !important;
+}
+
+.authorization-form #alternative-btn:active{
+    filter: brightness(20%) !important;
 }

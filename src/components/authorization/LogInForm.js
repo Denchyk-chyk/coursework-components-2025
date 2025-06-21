@@ -1,13 +1,15 @@
 import { useContext } from 'react';
 import AuthorizationForm from './AuthorizationForm';
-import { UserContext } from '../../contexts/UserContext';
-import { UsersContext } from '../../contexts/UsersContext';
+import { UserContext } from '../../logic/Contexts';
+import { UsersContext } from '../../logic/Contexts';
 import { sha512 } from '../../logic/authorization/sha512';
 import { loginUser } from '../../logic/authorization/loginUser';
+import { useNavigate } from 'react-router-dom';
 
-const LogInForm = ({ onSuccess }) => {
+const LogInForm = ({ onSuccess, SighnUpAddress }) => {
   const { setUser } = useContext(UserContext);
   const { users } = useContext(UsersContext);
+  const navigate = useNavigate();
 
   // Перевірка коректності введених даних (логін і пароль)
   const validate = async (values) => {
@@ -43,6 +45,7 @@ const LogInForm = ({ onSuccess }) => {
     <AuthorizationForm
       header='Вхід'
       alternative='Реєстрація'
+      alternativeAction={() => navigate(SighnUpAddress)}
       items={[
         {
           type: 'text',

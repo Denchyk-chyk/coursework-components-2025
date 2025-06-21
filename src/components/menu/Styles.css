@@ -1,11 +1,11 @@
-.cart {
+.cart-icon {
     position: relative;
     bottom: 5px;
     left: 6px;
     height: 25px;
 }
 
-.cart .counter {
+.cart-icon .counter {
     position: relative;
     bottom: 17px;
     left: 10px;
@@ -14,7 +14,7 @@
     padding: 0px;
 }
 
-.cart .counter p {
+.cart-icon .counter p {
     font-size: 11px;
     position: relative;
     top: 2px;
