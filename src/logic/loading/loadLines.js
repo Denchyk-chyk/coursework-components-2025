@@ -4,5 +4,5 @@ export async function loadLines(fileName) {
     throw new Error(`Не вдалося завантажити файл: ${fileName}`);
   }
   const text = await response.text();
-  return text.split(/\r?\n/).filter(line => line.trim() !== '');
+  return text.split(/\r?\n/).filter((line) => line.trim() !== "");
 }

@@ -1,14 +1,20 @@
 export const isGenreOrParentSelected = (target, selectedList, genres) => {
   const dfs = (node, path = []) => {
-    if (typeof node === 'string') {
+    if (typeof node === "string") {
       if (node === target) {
-        return selectedList.includes(node) || path.some(parent => selectedList.includes(parent));
+        return (
+          selectedList.includes(node) ||
+          path.some((parent) => selectedList.includes(parent))
+        );
       }
       return false;
     }
 
     if (node.name === target) {
-      return selectedList.includes(node.name) || path.some(parent => selectedList.includes(parent));
+      return (
+        selectedList.includes(node.name) ||
+        path.some((parent) => selectedList.includes(parent))
+      );
     }
 
     if (node.subgenres) {
@@ -20,5 +26,5 @@ export const isGenreOrParentSelected = (target, selectedList, genres) => {
     return false;
   };
 
-  return genres.some(genre => dfs(genre));
+  return genres.some((genre) => dfs(genre));
 };
