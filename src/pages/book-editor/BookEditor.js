@@ -6,7 +6,7 @@ import { BooksContext } from "../../logic/Contexts";
 import { CoversContext } from "../../logic/Contexts";
 import { GenresContext } from "../../logic/Contexts";
 import Footer from "../../components/footer/Footer";
-import AuthorizationForm from "../../components/authorization/AuthorizationForm";
+import CustomForm from "../../components/authorization/CustomForm";
 
 const BookEditor = () => {
   const { books, setBooks } = useContext(BooksContext);
@@ -16,10 +16,12 @@ const BookEditor = () => {
   const [formValues, setFormValues] = useState({});
   const navigate = useNavigate();
 
+  // Вибір книги для редагування або створення нової
   const book = useMemo(() => {
     if (!books || books.length === 0) return null;
 
     if (id == -1) {
+      // Нова книжка зі стандартними значеннями
       return {
         id: Math.max(0, ...books.map((b) => b.id)) + 1,
         title: "Нова книжка",
@@ -34,9 +36,11 @@ const BookEditor = () => {
       };
     }
 
+    // Існуюча книжка за id
     return books.find((item) => item.id == id) || null;
-  }, [books, id]);
+  }, [books, id, genres, covers]);
 
+  // Заповнення значень форми при зміні книги
   useEffect(() => {
     if (book) {
       setFormValues({
@@ -54,11 +58,12 @@ const BookEditor = () => {
     }
   }, [book]);
 
+  // Обробка змін у формі
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Якщо змінено жанр
     if (name === "Жанр") {
+      // Оновлення піджанрів при зміні жанру
       const newGenre = genres.find((g) => g.name === value);
       const firstSub1 = newGenre?.subgenres?.[0]?.name || "";
       const firstSub2 = newGenre?.subgenres?.[0]?.subgenres?.[0] || "";
@@ -72,8 +77,8 @@ const BookEditor = () => {
       return;
     }
 
-    // Якщо змінено піджанр 1 — оновити піджанр 2
     if (name === "Піджанр 1") {
+      // Оновлення піджанру 2 при зміні піджанру 1
       const genre = genres.find((g) => g.name === formValues["Жанр"]);
       const sub1 = genre?.subgenres?.find((s) => s.name === value);
       const firstSub2 = sub1?.subgenres?.[0] || "";
@@ -86,12 +91,13 @@ const BookEditor = () => {
       return;
     }
 
-    // Звичайне оновлення
+    // Звичайне оновлення поля
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
 
   if (!books || books.length === 0 || !book) return <div>Завантаження...</div>;
 
+  // Списки піджанрів для селектів
   const selectedGenre = genres.find((g) => g.name === formValues["Жанр"]);
   const subgenres1 = selectedGenre?.subgenres?.map((s) => s.name) || [];
 
@@ -100,6 +106,7 @@ const BookEditor = () => {
   );
   const subgenres2 = selectedSubgenre1?.subgenres || [];
 
+  // Обробка відправки форми
   const handleSubmit = (value) => {
     const updatedBook = {
       ...book,
@@ -115,8 +122,6 @@ const BookEditor = () => {
       price: Number(value["Цна"]),
     };
 
-    // Збереження книжки в контекст:
-    console.log(updatedBook);
     setBooks((prev) => {
       const exists = prev.some((b) => b.id == updatedBook.id);
       if (exists) {
@@ -126,7 +131,6 @@ const BookEditor = () => {
       }
     });
 
-    // Вихід
     navigate("/");
   };
 
@@ -134,7 +138,7 @@ const BookEditor = () => {
     <div>
       <Menu />
       <section>
-        <AuthorizationForm
+        <CustomForm
           header={book.title}
           items={[
             { id: "title", type: "text", name: "Назва" },

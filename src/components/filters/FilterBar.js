@@ -13,8 +13,8 @@ import { applyFilters } from "../../logic/filtration/applyFilters";
 
 // Бічна панель фільтрів для книги
 // Підтримується фільтрація за жанрами, авторами, видавництвами, обкладинками, ціною
-
 const FilterBar = ({ setFitered, initialSelectedGenres = [] }) => {
+  // Отримання глобальних даних через контексти
   const { books } = useContext(BooksContext);
   const { authors } = useContext(AuthorsContext);
   const { publishers } = useContext(PublishersContext);
@@ -38,7 +38,7 @@ const FilterBar = ({ setFitered, initialSelectedGenres = [] }) => {
     }
   }, [books]);
 
-  // Стан розгорнутості секцій
+  // Стан розгорнутості секцій фільтрів
   const [sectionsOpen, setSectionsOpen] = useState({
     genres: true,
     authors: false,
@@ -47,7 +47,7 @@ const FilterBar = ({ setFitered, initialSelectedGenres = [] }) => {
     price: true,
   });
 
-  // Застосувати фільтри при зміні selectedGenres або інших фільтрів
+  // Застосування фільтрів автоматично при зміні будь-якого з критеріїв
   useEffect(() => {
     const filtered = applyFilters(
       books,
@@ -67,7 +67,7 @@ const FilterBar = ({ setFitered, initialSelectedGenres = [] }) => {
     books,
   ]);
 
-  // Застосування фільтрів до списку книг
+  // Альтернативне застосування фільтрів вручну (не використовується зараз)
   const handleApplyFilters = () => {
     const filtered = applyFilters(
       books,
@@ -82,6 +82,7 @@ const FilterBar = ({ setFitered, initialSelectedGenres = [] }) => {
 
   return (
     <>
+      {/* Кнопка відкриття бічної панелі */}
       <Button
         variant="secondary"
         onClick={toggleSidebar}
@@ -103,29 +104,39 @@ const FilterBar = ({ setFitered, initialSelectedGenres = [] }) => {
         </svg>
       </Button>
 
+      {/* Бічна панель фільтрів */}
       <Offcanvas show={show} onHide={toggleSidebar} className="p-2">
         <Offcanvas.Header closeButton className="pb-1">
           <Offcanvas.Title className="fs-3 w-100 text-center">
             Фільтри
           </Offcanvas.Title>
         </Offcanvas.Header>
+
         <Offcanvas.Body>
           <Form>
+            {/* Фільтр за жанрами */}
             <FilterSection
               header="Жанри"
               isOpen={sectionsOpen.genres}
               toggleOpen={() =>
-                setSectionsOpen((prev) => ({ ...prev, genres: !prev.genres }))
+                setSectionsOpen((prev) => ({
+                  ...prev,
+                  genres: !prev.genres,
+                }))
               }
             >
               <GenresList list={selectedGenres} setList={setSelectedGenres} />
             </FilterSection>
 
+            {/* Фільтр за авторами */}
             <FilterSection
               header="Автори"
               isOpen={sectionsOpen.authors}
               toggleOpen={() =>
-                setSectionsOpen((prev) => ({ ...prev, authors: !prev.authors }))
+                setSectionsOpen((prev) => ({
+                  ...prev,
+                  authors: !prev.authors,
+                }))
               }
             >
               <ToggleList
@@ -135,6 +146,7 @@ const FilterBar = ({ setFitered, initialSelectedGenres = [] }) => {
               />
             </FilterSection>
 
+            {/* Фільтр за видавництвами */}
             <FilterSection
               header="Видавництва"
               isOpen={sectionsOpen.publishers}
@@ -152,11 +164,15 @@ const FilterBar = ({ setFitered, initialSelectedGenres = [] }) => {
               />
             </FilterSection>
 
+            {/* Фільтр за типом обкладинки */}
             <FilterSection
               header="Обкладинки"
               isOpen={sectionsOpen.covers}
               toggleOpen={() =>
-                setSectionsOpen((prev) => ({ ...prev, covers: !prev.covers }))
+                setSectionsOpen((prev) => ({
+                  ...prev,
+                  covers: !prev.covers,
+                }))
               }
             >
               <ToggleList
@@ -166,11 +182,15 @@ const FilterBar = ({ setFitered, initialSelectedGenres = [] }) => {
               />
             </FilterSection>
 
+            {/* Фільтр за ціною */}
             <FilterSection
               header="Ціна"
               isOpen={sectionsOpen.price}
               toggleOpen={() =>
-                setSectionsOpen((prev) => ({ ...prev, price: !prev.price }))
+                setSectionsOpen((prev) => ({
+                  ...prev,
+                  price: !prev.price,
+                }))
               }
             >
               <PriceRange values={priceRange} setValues={setPriceRange} />

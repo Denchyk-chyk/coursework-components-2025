@@ -1,11 +1,12 @@
 import { useContext } from "react";
-import AuthorizationForm from "./AuthorizationForm";
+import CustomForm from "./CustomForm";
 import { UserContext } from "../../logic/Contexts";
 import { UsersContext } from "../../logic/Contexts";
 import { sha512 } from "../../logic/authorization/sha512";
 import { loginUser } from "../../logic/authorization/loginUser";
 import { useNavigate } from "react-router-dom";
 
+// Форма для входу користувача
 const LogInForm = ({ onSuccess, SighnUpAddress }) => {
   const { setUser } = useContext(UserContext);
   const { users } = useContext(UsersContext);
@@ -40,7 +41,7 @@ const LogInForm = ({ onSuccess, SighnUpAddress }) => {
   };
 
   return (
-    <AuthorizationForm
+    <CustomForm
       header="Вхід"
       alternative="Реєстрація"
       alternativeAction={() => navigate(SighnUpAddress)}

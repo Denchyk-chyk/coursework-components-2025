@@ -1,5 +1,6 @@
 import "./Styles.css";
 
+// Шаблон для статей, що складаються з блоків: зображення, заголовок, абзац тексту
 const Article = ({ blocks }) => {
   const renderBlock = (block, i) => {
     switch (block.type) {

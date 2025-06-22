@@ -1,24 +1,28 @@
 import { Form } from "react-bootstrap";
 
+// Компонент, що повертає різні поля для вводу залежно від вхідних параметрів
+// Та надаєзручний доступ до них
+
 const FormField = ({
-  name,
-  type,
-  value,
-  onChange,
-  onBlur,
-  rows,
-  options,
-  isInvalid,
-  errorText,
+  name, // Назва поля (одночасно label та name атрибут)
+  type, // Тип вводу: text, number, select, textarea тощо
+  value, // Поточне значення поля
+  onChange, // Обробник зміни значення
+  onBlur, // Обробник події втрати фокусу (не обов'язковий)
+  rows, // Кількість рядків для textarea
+  options, // Варіанти для select (масив об’єктів або рядків)
+  isInvalid, // Ознака наявності помилки валідації
+  errorText, // Текст помилки
 }) => {
   return (
     <Form.Group className="mb-3" controlId={name}>
       <Form.Label className="text-muted">{name}</Form.Label>
 
+      {/* Вибір типу поля залежно від параметра 'type' */}
       {type === "textarea" ? (
         <Form.Control
           className="p-2"
-          as="textarea"
+          as="textarea" // Використання textarea
           name={name}
           rows={rows || 3}
           value={value}
@@ -35,6 +39,7 @@ const FormField = ({
           onBlur={onBlur}
           isInvalid={isInvalid}
         >
+          {/* Виведення опцій для select */}
           {options.map((o, i) => (
             <option key={i} value={o.value ?? o} className="p-2">
               {o.name ?? o}
@@ -44,7 +49,7 @@ const FormField = ({
       ) : (
         <Form.Control
           className="p-2"
-          type={type}
+          type={type} // input з вказаним типом (text, number тощо)
           name={name}
           value={value}
           onChange={onChange}
@@ -53,6 +58,7 @@ const FormField = ({
         />
       )}
 
+      {/* Виведення повідомлення про помилку, якщо є */}
       {isInvalid && errorText && (
         <Form.Control.Feedback type="invalid">
           {errorText}

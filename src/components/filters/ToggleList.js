@@ -4,7 +4,6 @@ import { Form } from "react-bootstrap";
 // Компонент списку з чекбоксами та пошуком
 // Пошук фільтрує доступні опції, оновлення вибору відбувається через колбек setSelected
 // Опція noSearch вимикає поле пошуку
-
 const ToggleList = (props) => {
   const [search, setSearch] = useState(""); // Значення пошуку
   const noSearch = props.noSearch ?? false; // Відсутність пошуку за замовчуванням - false

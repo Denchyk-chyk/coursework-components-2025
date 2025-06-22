@@ -1,13 +1,31 @@
 import { useState, useEffect } from "react";
 
+/**
+ * Користувацький React-хук, що відстежує ширину вікна браузера у реальному часі.
+ *
+ * @returns {number} Поточна ширина вікна (window.innerWidth)
+ *
+ * Логіка роботи:
+ * - Ініціалізує стан шириною вікна при монтуванні компонента.
+ * - Додає слухача події "resize" на вікно, що оновлює стан при зміні розмірів.
+ * - При розмонтуванні компонента слухач видаляється для уникнення витоків пам’яті.
+ * - Повертає актуальне значення ширини вікна, яке можна використовувати для адаптивної логіки.
+ */
 export function useWindowWidth() {
+  // Стан для збереження ширини вікна, початково — поточна ширина
   const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
+    // Функція-обробник події resize, оновлює стан ширини
     const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
+    // Додаємо слухача події resize до вікна
+    window.addEventListener("resize", handleResize);
+
+    // Функція очистки: видаляємо слухача при розмонтуванні компонента
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Порожній масив залежностей — ефект виконається лише один раз при монтуванні
+
+  // Повертаємо актуальне значення ширини вікна
   return width;
 }

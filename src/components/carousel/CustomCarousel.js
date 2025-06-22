@@ -3,30 +3,35 @@ import "./Styles.css";
 import ArrowButton from "../basics/ArrowButton";
 import { useNavigate } from "react-router-dom";
 
-function CustomCarousel({ slides }) {
-  const navigate = useNavigate();
+// Карусель з кастомними стрілками та підтримкою клікабельних слайдів
+const CustomCarousel = ({ slides }) => {
+  const navigate = useNavigate(); // Хук для переходу між маршрутами
 
   return (
     <Carousel
-      prevIcon={<ArrowButton direction="left" />}
-      nextIcon={<ArrowButton direction="right" />}
+      prevIcon={<ArrowButton direction="left" />} // Кастомна ліва стрілка
+      nextIcon={<ArrowButton direction="right" />} // Кастомна права стрілка
     >
       {slides.map((s, i) => (
         <Carousel.Item key={i}>
           <Carousel.Caption>
+            {/* Заголовок слайду */}
             <h1>{s.title}</h1>
             <div className="d-flex justify- content-center align-items-center">
-              <p className="fs-5 m-auto mb-2">{s.desc}</p>
+              <p className="fs-5 m-auto mb-2">{s.desc}</p> {/* Опис слайду */}
             </div>
           </Carousel.Caption>
-          <picture onClick={() => navigate(s.path)}>
-            <source media="(max-width: 600px)" srcSet={s.images[1]} />
-            <img src={s.images[0]} alt={"Slide " + { i }} />
-          </picture>
+
+          {/* Картинка, яка клікається й переводить за шляхом слайду */}
+          <img
+            src={s.image}
+            alt={"Slide " + i}
+            onClick={() => navigate(s.path)}
+          />
         </Carousel.Item>
       ))}
     </Carousel>
   );
-}
+};
 
 export default CustomCarousel;

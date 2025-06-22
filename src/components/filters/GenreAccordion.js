@@ -6,10 +6,9 @@ import { Button } from "react-bootstrap";
 // Компонент вузла жанру з можливістю розгортання піджанрів
 // Якщо вузол має дочірні піджанри, відображається секція з кнопкою-розгортання
 // При натисканні на заголовок виконується вибір жанру через onSelect
-
 const GenreNode = (props) => {
   const [isOpen, setIsOpen] = useState(false); // Стан розгортання вузла
-  const toggleOpen = () => setIsOpen(!isOpen);
+  const toggleOpen = () => setIsOpen(!isOpen); // Перемикання стану відкриття
 
   const { node, onSelect, className } = props;
   const hasChildren =
@@ -20,6 +19,7 @@ const GenreNode = (props) => {
     onSelect?.(node.name);
   };
 
+  // Якщо жанр має піджанри — рендер вкладеної секції через FilterSection
   if (hasChildren) {
     return (
       <FilterSection
@@ -48,6 +48,7 @@ const GenreNode = (props) => {
     );
   }
 
+  // Якщо жанр без піджанрів — звичайна кнопка
   return (
     <Button
       variant="link"
@@ -61,7 +62,6 @@ const GenreNode = (props) => {
 
 // Аккордеон жанрів, що відображає кореневі жанри з можливістю вибору
 // Дані жанрів отримуються через контекст GenresContext
-
 const GenreAccordion = ({ onSelect }) => {
   const { genres } = useContext(GenresContext);
 

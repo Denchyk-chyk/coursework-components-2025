@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 // Компонент для відображення кнопок придбання
 // Для адміністратора надається додаткова кнопка переходу до редагування книги
 // Для звичайного користувача використовується стандартна кнопка придбання
-
 function AdminPurchaseButtons({ book }) {
   const { user } = useContext(UserContext);
 

@@ -10,8 +10,7 @@ const FirstNews = () => {
         blocks={[
           {
             type: "image",
-            value:
-              "https://i.pinimg.com/736x/54/d0/02/54d0020d863a6c7da9a1aa9e5891b8b9.jpg",
+            value: "news/News 1.jpg",
           },
           { type: "header", value: "Dictum risus blandit" },
           {
@@ -24,7 +23,7 @@ const FirstNews = () => {
           {
             type: "image",
             value:
-              "https://static01.nyt.com/images/2017/05/11/t-magazine/bookstore-slide-2MCD/bookstore-slide-2MCD-superJumbo.jpg",
+              "https://i.pinimg.com/736x/54/d0/02/54d0020d863a6c7da9a1aa9e5891b8b9.jpg",
           },
           { type: "header", value: "Cras eleifend turpis" },
           {

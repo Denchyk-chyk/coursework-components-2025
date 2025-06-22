@@ -1,22 +1,12 @@
-import AuthorizationForm from "./AuthorizationForm";
+import CustomForm from "./CustomForm";
 import { useState } from "react";
 
+// Форма для офолення замовлення
 const OrderForm = ({ onSuccess, price }) => {
+  // Стан для типу доставки
   const [deliveryType, setDeliveryType] = useState("nova-office");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormValues((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    if (name === "Тип доставки") {
-      setDeliveryType(value);
-    }
-  };
-
+  // Стан для збереження значень полів форми
   const [formValues, setFormValues] = useState({
     Місто: "",
     "Тип доставки": "nova-office",
@@ -25,6 +15,23 @@ const OrderForm = ({ onSuccess, price }) => {
     Оплата: "prepay",
   });
 
+  // Обробка зміни значення поля форми
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    // Оновлення відповідного поля у стані форми
+    setFormValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // Якщо змінюється тип доставки — окремо оновлюється відповідний стан
+    if (name === "Тип доставки") {
+      setDeliveryType(value);
+    }
+  };
+
+  // Визначення відображуваного поля в залежності від типу доставки
   const visibleItem =
     deliveryType === "nova-box"
       ? {
@@ -38,6 +45,7 @@ const OrderForm = ({ onSuccess, price }) => {
           name: "Відділення",
         };
 
+  // Варіанти оплати. Якщо обрано поштомат, післяплата не доступна
   const visiblePayments = [
     {
       name: "Передплата",
@@ -49,10 +57,11 @@ const OrderForm = ({ onSuccess, price }) => {
           value: "postpay",
         }
       : null,
-  ].filter(Boolean);
+  ].filter(Boolean); // Видалення null, якщо післяплата не доступна
 
+  // Рендер форми з передачею полів, значень та обробників
   return (
-    <AuthorizationForm
+    <CustomForm
       items={[
         {
           id: "order-city",
@@ -77,10 +86,10 @@ const OrderForm = ({ onSuccess, price }) => {
           options: visiblePayments,
         },
       ]}
-      header={`${price} грн`}
-      outerValues={formValues}
-      onChange={handleChange}
-      onSubmit={onSuccess}
+      header={`${price} грн`} // Заголовок форми — ціна
+      outerValues={formValues} // Передача зовнішнього стану форми
+      onChange={handleChange} // Обробка змін полів форми
+      onSubmit={onSuccess} // Обробка відправлення форми
     />
   );
 };

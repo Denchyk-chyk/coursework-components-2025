@@ -9,34 +9,40 @@ import "./Styles.css";
 import { useParams } from "react-router-dom";
 
 const Catalog = () => {
-    const { books } = useContext(BooksContext);
-    const [filtered, setFiltered] = useState(books);
-    const [found, setFound] = useState(books);
-    const { genre } = useParams();
+  const { books } = useContext(BooksContext);
 
-    useEffect(() => {
-        setFiltered(books);
-    }, [books]);
+  // Відфільтровані книги, які показуються у фільтрах
+  const [filtered, setFiltered] = useState(books);
 
-    return (
-        <div id='catalog' className='d-flex flex-column min-vh-100'>
-            <Menu />
+  // Книги, які відповідають пошуковому запиту
+  const [found, setFound] = useState(books);
 
-            <div id='filters'>
-                <FilterBar 
-                    setFitered={setFiltered} 
-                    initialSelectedGenres={genre ? [genre] : []} 
-                />
-                <Search books={filtered} setFound={setFound}/>
-            </div>
+  const { genre } = useParams();
 
-            <section>
-                <WideGallery books={found} rows={4} />
-            </section>
+  // Оновлення відфільтрованих книг при зміні всіх книг
+  useEffect(() => {
+    setFiltered(books);
+  }, [books]);
 
-            <Footer className='mt-auto' />
-        </div>
-    );
-}
+  return (
+    <div id="catalog" className="d-flex flex-column min-vh-100">
+      <Menu />
+
+      <div id="filters">
+        <FilterBar
+          setFitered={setFiltered}
+          initialSelectedGenres={genre ? [genre] : []}
+        />
+        <Search books={filtered} setFound={setFound} />
+      </div>
+
+      <section>
+        <WideGallery books={found} rows={4} />
+      </section>
+
+      <Footer className="mt-auto" />
+    </div>
+  );
+};
 
 export default Catalog;

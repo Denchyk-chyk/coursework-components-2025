@@ -1,4 +1,4 @@
-import AuthorizationForm from "./AuthorizationForm";
+import CustomForm from "./CustomForm";
 import { UsersContext } from "../../logic/Contexts";
 import { UserContext } from "../../logic/Contexts";
 import { useContext } from "react";
@@ -6,6 +6,7 @@ import { sha512 } from "../../logic/authorization/sha512";
 import { loginUser } from "../../logic/authorization/loginUser";
 import { useNavigate } from "react-router-dom";
 
+// Форма для реєстрації користувача
 const SignUpForm = ({ onSuccess, LogInAddress }) => {
   const { users, setUsers } = useContext(UsersContext);
   const { setUser } = useContext(UserContext);
@@ -67,7 +68,7 @@ const SignUpForm = ({ onSuccess, LogInAddress }) => {
   };
 
   return (
-    <AuthorizationForm
+    <CustomForm
       header="Реєстрація"
       alternative="Вхід"
       alternativeAction={() => navigate(LogInAddress)}

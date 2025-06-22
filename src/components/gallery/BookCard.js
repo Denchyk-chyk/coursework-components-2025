@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 // Компонент відображення інформації про книгу у вигляді картки
 // Джерело зображення книги, назва, автор і ціна отримуються з об'єкта book
 // Кнопка (button) передається як дочірній компонент
-
 function BookCard({ book, button }) {
   return (
     <Card className="book-card shadow">

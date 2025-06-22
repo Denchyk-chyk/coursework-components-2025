@@ -5,7 +5,6 @@ import { CartContext } from "../../logic/Contexts";
 // Кнопка додавання книги до кошика
 // У разі наявності книги в кошику — виконується збільшення кількості
 // У разі відсутності — виконується додавання нового запису з кількістю 1
-
 function PurchaseButton({ book }) {
   const { cart, setCart } = useContext(CartContext);
 

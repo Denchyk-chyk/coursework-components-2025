@@ -5,7 +5,6 @@ import FormField from "../authorization/FormField";
 // Компонент діапазону цін з двома полями введення: "Від" і "До"
 // Локальні стани оновлюються при зміні зовнішніх значень
 // Значення проходять валідацію при втраті фокусу
-
 const PriceRange = ({ values, setValues }) => {
   const [fromInput, setFromInput] = useState("");
   const [toInput, setToInput] = useState("");

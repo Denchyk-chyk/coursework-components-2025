@@ -12,11 +12,13 @@ const UserCart = () => {
   const { cart, setCart } = useContext(CartContext);
   const navigate = useNavigate();
 
+  // Загальна сума замовлення
   const totalPrice = cart.reduce(
     (sum, { book, count }) => sum + book.price * count,
     0
   );
 
+  // Якщо корзина порожня, перенаправити на каталог
   useEffect(() => {
     if (cart.length === 0) {
       navigate("/catalog");

@@ -4,7 +4,6 @@ import { Button, Form } from "react-bootstrap";
 // Компонент пошуку книг за назвою
 // Поле введення використовується для фільтрації масиву books
 // Результати записуються у setFound
-
 const Search = ({ books, setFound }) => {
   const [query, setQuery] = useState(""); // Поточне значення рядка пошуку
 

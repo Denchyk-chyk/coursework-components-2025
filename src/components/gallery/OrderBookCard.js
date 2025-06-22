@@ -3,9 +3,8 @@ import { Button, Form } from "react-bootstrap";
 import BookCard from "./BookCard";
 import { CartContext } from "../../logic/Contexts";
 
-// Компонент замовлення книги у вигляді картки
+// Картка з книгою, що відображається в корзині
 // Використовується компонент BookCard з кастомною кнопкою у вигляді блоку введення кількості та кнопки зменшення
-
 function OrderBookCard({ order }) {
   const { cart, setCart } = useContext(CartContext);
   const { book, count } = order;

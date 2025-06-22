@@ -6,7 +6,6 @@ import PurchaseBookCard from "./PurchaseBookCard";
 // Компонент галереї для відображення книг у сітці
 // Початкова кількість елементів визначається значенням rows * 4
 // При натисканні кнопки додається ще одна порція елементів
-
 function WideGallery({ books, rows }) {
   const [count, setCount] = useState(rows * 4); // Лічильник видимих елементів
 
