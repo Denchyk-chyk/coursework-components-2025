@@ -58,6 +58,7 @@ const FilterBar = ({ setFitered, initialSelectedGenres = [] }) => {
       selectedGenres
     );
     setFitered(filtered);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     selectedGenres,
     selectedAuthors,
@@ -66,19 +67,6 @@ const FilterBar = ({ setFitered, initialSelectedGenres = [] }) => {
     priceRange,
     books,
   ]);
-
-  // Альтернативне застосування фільтрів вручну (не використовується зараз)
-  const handleApplyFilters = () => {
-    const filtered = applyFilters(
-      books,
-      selectedAuthors,
-      selectedPublishers,
-      selectedCovers,
-      priceRange,
-      selectedGenres
-    );
-    setFitered(filtered);
-  };
 
   return (
     <>

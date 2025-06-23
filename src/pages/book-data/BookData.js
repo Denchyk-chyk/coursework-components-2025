@@ -16,6 +16,7 @@ const BookData = () => {
   // пошук книги по id при зміні books або id
   const book = useMemo(() => {
     if (!books || books.length === 0) return null;
+    // eslint-disable-next-line eqeqeq
     return books.find((item) => item.id == id) || null;
   }, [books, id]);
 
@@ -25,6 +26,7 @@ const BookData = () => {
 
     // фільтрація книг за тим самим жанром, виключаючи поточну
     const sameGenre = books.filter(
+      // eslint-disable-next-line eqeqeq
       (b) => b.genre === book.genre && b.id != book.id
     );
 
